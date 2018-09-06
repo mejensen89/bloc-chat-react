@@ -13,7 +13,7 @@ class RoomList extends Component {
 		this.roomsRef = this.props.firebase.database().ref('rooms');
 		this.handleRoomInput = this.handleRoomInput.bind(this);
 		this.createRoom = this.createRoom.bind(this);
-	}
+		}
 
 	componentDidMount(){
 		this.roomsRef.on('child_added', snapshot => {
@@ -40,7 +40,7 @@ class RoomList extends Component {
 
 	render(){
 		return (
-			<section>
+			<section className="oneWide">
 
 				<h1> Bloc Chat List </h1>
 				<ul id="chat-list">

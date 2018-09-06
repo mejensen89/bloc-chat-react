@@ -23,21 +23,29 @@ class MessageList extends Component {
 			this.setState({ message: this.state.message.concat(message)});
 		});
 	}
+
 	render (){
-		const activeRoomKey = parseInt(this.props.activeRoomKey);
-		return(
-			<section>
-				<h1> {this.props.activeRoom.name}</h1>
-				<ul>
-				{this.state.message.filter(message => message.roomID === activeRoomKey).map((message,index) =>
-					<div key={index}>
-						<li>{message.username}<br></br> {message.content}</li>
-						<li> {message.sentAt}</li>
-					</div>)}
-				</ul>
-			</section>
-			)
-	}
+    	return(
+       		<div className = "fiveWide">
+            	<h1>{this.props.activeRoom.name}</h1>
+            	<div className="messageDisplay">
+                		{this.state.message
+                		.filter(message =>message.roomId === this.props.activeRoom.key)
+                		.map((message,index) =>
+                			<div key={index} className="smallRow WheatOut">
+                  				<p className="tenPad">User: {message.username} </p>
+                  				<p className="tenPad">Says: {message.content}</p> 
+                  				<p className="tenPad">Time: {message.sentAt}</p>
+                			</div>
+                )
+                }
+               	</div>        
+      </div>
+
+    )
+ }
 }
+
+
 
 export default MessageList;
