@@ -27,10 +27,10 @@ class MessageList extends Component {
 	render (){
     	return(
        		<div className = "fiveWide">
-            	<h1>{this.props.activeRoom.name}</h1>
+            	<h1 className="txtC">Chat Room: {this.props.activeRoom.name}</h1>
             	<div className="messageDisplay">
                 		{this.state.message
-                		.filter(message =>message.roomId === this.props.activeRoom.key)
+                		.filter(message =>message.roomID === this.props.activeRoom.key)
                 		.map((message,index) =>
                 			<div key={index} className="smallRow WheatOut">
                   				<p className="tenPad">User: {message.username} </p>
