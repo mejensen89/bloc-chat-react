@@ -43,11 +43,7 @@ class RoomList extends Component {
 			<section className="oneWide">
 
 				<h1> Bloc Chat List </h1>
-				<ul id="chat-list">
-				{this.state.rooms.map( room =>
-					<li key={room.key}>{room.name}</li>
-				)}
-				</ul>
+
 				<form>
 					<input 
 						type="text" 
@@ -62,10 +58,17 @@ class RoomList extends Component {
 					</button>
 
 				</form>
+
+				<ul id="chat-list" >
+				{this.state.rooms.map( room =>
+					<li key={room.key} onClick={()=> this.props.setActiveRoom(room)}>{room.name}</li>
+				)}
+				</ul>
+				
 			</section>
 			);
 	}
-
+ 
 } 
 
 export default RoomList;
