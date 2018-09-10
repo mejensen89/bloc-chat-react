@@ -53,6 +53,7 @@ class RoomList extends Component {
 					/>
 					<button 
 						onClick={this.createRoom}
+						className="btnRounded fivePad WhiteBack BlackOut"
 						>
 						Make your chat room 
 					</button>

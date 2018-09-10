@@ -138,7 +138,6 @@ header {
 .btnSquare {
 	border-radius: 0px;
 	font-size: 12px;
-	padding: 6px 12px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
@@ -147,7 +146,6 @@ header {
 .btnRounded {
 	border-radius: 12px;
 	font-size: 12px;
-	padding: 6px 12px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
@@ -156,7 +154,6 @@ header {
 .btnEllipse {
 	border-radius: 18px;
 	font-size: 12px;
-	padding: 6px 12px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
@@ -202,6 +199,14 @@ header {
 	padding: 0px;
 }
 /*background classes */
+
+.threeGrayBack {
+	background-image: linear-gradient(Gainsboro, Silver, White);
+}
+
+.threeBlueBack {
+	background-image: linear-gradient(AliceBlue, CornflowerBlue, LightSkyBlue);
+}
 
 .AliceBlueBack {
 	background-color: AliceBlue;
@@ -1605,6 +1610,14 @@ header {
 
 .tenMarg {
 	margin: 10px;
+}
+
+.fivePad {
+	padding: 5px;
+}
+
+.fiveMarg {
+	margin: 5px;
 }
 
 .zeroGaps {

@@ -26,6 +26,7 @@ class App extends Component {
   this.state={
       activeRoom: ' ',
       currentUser: ' ',
+      user: ' '
     }
     this.setActiveRoom = this.setActiveRoom.bind(this);
     this.setUser = this.setUser.bind(this);
@@ -42,7 +43,7 @@ class App extends Component {
   render() {
     return (
       <div className="App row">
-        <aside className="twoWide">
+        <aside className="oneWide threeGrayBack">
           <User 
             firebase={firebase}
             currentUser={this.state.currentUser}
@@ -54,7 +55,7 @@ class App extends Component {
             setActiveRoom = {this.setActiveRoom}
            />
          </aside>
-         <section className = "fourWide">
+         <section className = "fiveWide threeBlueBack">
           <MessageList 
             firebase={firebase}  
             activeRoom = {this.state.activeRoom}

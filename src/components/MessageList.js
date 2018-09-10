@@ -32,10 +32,10 @@ class MessageList extends Component {
                 		{this.state.message
                 		.filter(message =>message.roomID === this.props.activeRoom.key)
                 		.map((message,index) =>
-                			<div key={index} className="smallRow WheatOut">
-                  				<p className="tenPad">User: {message.username} </p>
-                  				<p className="tenPad">Says: {message.content}</p> 
-                  				<p className="tenPad">Time: {message.sentAt}</p>
+                			<div key={index} className="GainsboroBack WheatOut">
+                  				<p className="txtL">User: {message.username} </p>
+                  				<p className="txtL">Says: {message.content}</p> 
+                  				<p className="txtL">Time: {message.sentAt}</p>
                 			</div>
                 )
                 }
