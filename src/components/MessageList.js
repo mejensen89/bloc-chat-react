@@ -26,7 +26,7 @@ class MessageList extends Component {
 
 	render (){
     	return(
-       		<div className = "fiveWide">
+       		<div>
             	<h1 className="txtC">Chat Room: {this.props.activeRoom.name}</h1>
             	<div className="messageDisplay">
                 		{this.state.message

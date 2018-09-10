@@ -40,7 +40,7 @@ class RoomList extends Component {
 
 	render(){
 		return (
-			<section className="oneWide">
+			<section>
 
 				<h1> Bloc Chat List </h1>
 
