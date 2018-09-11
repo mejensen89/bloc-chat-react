@@ -15,12 +15,44 @@ class MessageList extends Component {
 			}]
 		}
 		this.MessagesRef= this.props.firebase.database().ref('Messages');
+		this.handleMessageInput = this.handleMessageInput.bind(this);
+		this.createMessage = this.createMessage.bind(this);
 	}
+
 	componentDidMount(){
 		this.MessagesRef.on('child_added', snapshot => {
 			const message = snapshot.val();
 			message.key = snapshot.key
 			this.setState({ message: this.state.message.concat(message)});
+		});
+	}
+
+	createMessage() {
+		if (this.props.activeRoom) {
+			const username = this.props.currentUser ? this.props.currentUser.displayName : 'Guest';
+			const timestamp = this.props.firebase.database.ServerValue.TIMESTAMP;
+			this.MessagesRef.push({
+				username: username,
+				content: this.state.content,
+				roomID: this.props.activeRoom.key,
+				sentAt: timestamp
+			});
+			this.setState({
+				content: '',
+				sentAt: timestamp
+			});
+		}
+			else {
+				alert('Pick a room before sending a message please');
+				this.setState({
+					content: ''
+				});
+			}
+		}
+
+	handleMessageInput(e){
+		this.setState({
+			content: e.target.value
 		});
 	}
 
@@ -39,6 +71,15 @@ class MessageList extends Component {
                 			</div>
                 )
                 }
+                <form className="bottomRow">
+                	<input 
+                		type="text"
+                		value={this.state.content}
+                		placeholder="Say something"
+                		onChange={this.handleMessageInput}
+                	/>
+                	<button onClick={this.createMessage}> Send </button>
+                </form>
                	</div>        
       </div>
 
