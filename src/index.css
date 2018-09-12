@@ -1,8 +1,17 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+#messageList {
+	overflow-y: scroll;
+	max-height: 70%;
 }
+
+#messageDisplay {
+	position: relative;
+}
+
+aside {
+	overflow-y: scroll;
+	max-height: 70%;
+}
+	
 
 /* A simple grid by mejensen89 */
 /*version 0.1 */
@@ -1640,6 +1649,10 @@ header {
 }
 .posSticky {
 	position: sticky;
+}
+
+.vertAlignC {
+	vertical-align: middle;
 }
 /*Font Awesome icon styling */
 

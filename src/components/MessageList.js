@@ -9,7 +9,7 @@ class MessageList extends Component {
 			message: [],
 			Messages: [{
 				username: '',
-				content: '',
+				content: ' ',
 				roomID: '',
 				sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
 			}]
@@ -27,58 +27,61 @@ class MessageList extends Component {
 		});
 	}
 
-	createMessage() {
-		if (this.props.activeRoom) {
-			const username = this.props.currentUser ? this.props.currentUser.displayName : 'Guest';
-			const timestamp = this.props.firebase.database.ServerValue.TIMESTAMP;
-			this.MessagesRef.push({
-				username: username,
-				content: this.state.content,
-				roomID: this.props.activeRoom.key,
-				sentAt: timestamp
-			});
-			this.setState({
-				content: '',
-				sentAt: timestamp
-			});
-		}
-			else {
-				alert('Pick a room before sending a message please');
-				this.setState({
-					content: ''
-				});
-			}
+	createMessage(newMessages) {
+		this.MessagesRef.push({
+			username: this.props.user ? this.props.user.displayName : 'Guest',
+			content: this.state.newMessages,
+			roomID: this.props.activeRoom.key,
+			sentAt: this.props.firebase.database.ServerValue.TIMESTAMP
+		});
+		this.setState({newMessages: ' '});
 		}
 
 	handleMessageInput(e){
 		this.setState({
-			content: e.target.value
+			newMessages: e.target.value
 		});
+	}
+
+	formatTime(time) {
+		let date = new Date(time);
+		let year = date.getFullYear();
+		let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+		let month = months[date.getMonth()];
+		let day = date.getDate();
+		let hour = date.getHours();
+		let min = date.getMinutes();
+		let sec = date.getSeconds();
+		let timestamp = month + ' ' + day + ', ' + year + ' ' + hour + ':' + min + ':' + sec;
+		return timestamp
 	}
 
 	render (){
     	return(
-       		<div>
+       		<div id="messageList">
             	<h1 className="txtC">Chat Room: {this.props.activeRoom.name}</h1>
-            	<div className="messageDisplay">
+            	<div id="messageDisplay">
                 		{this.state.message
                 		.filter(message =>message.roomID === this.props.activeRoom.key)
                 		.map((message,index) =>
                 			<div key={index} className="GainsboroBack WheatOut">
                   				<p className="txtL">User: {message.username} </p>
                   				<p className="txtL">Says: {message.content}</p> 
-                  				<p className="txtL">Time: {message.sentAt}</p>
+                  				<p className="txtL">Time: {this.formatTime(message.sentAt)}</p>
                 			</div>
                 )
                 }
-                <form className="bottomRow">
+                <form className="bottomRow BlueBack "
+                	onSubmit={(e)=> {e.preventDefault(); this.createMessage(this.state.newMessages)}}
+                >
                 	<input 
                 		type="text"
                 		value={this.state.content}
                 		placeholder="Say something"
                 		onChange={this.handleMessageInput}
+                		className = "vertAlignC"
                 	/>
-                	<button onClick={this.createMessage}> Send </button>
+                	<input type = "submit" className = "vertAlignC"/>
                 </form>
                	</div>        
       </div>
