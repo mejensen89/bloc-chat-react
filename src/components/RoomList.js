@@ -13,6 +13,7 @@ class RoomList extends Component {
 		this.roomsRef = this.props.firebase.database().ref('rooms');
 		this.handleRoomInput = this.handleRoomInput.bind(this);
 		this.createRoom = this.createRoom.bind(this);
+		this.deleteRoom = this.deleteRoom.bind(this);
 		}
 
 	componentDidMount(){
@@ -36,6 +37,11 @@ class RoomList extends Component {
 
 	handleRoomInput(e) {
 		this.setState({newRoomName: e.target.value});
+	}
+
+	deleteRoom (roomkey) {
+		let room = this.props.firebase.database().ref('rooms/' + roomkey);
+		room.remove();
 	}
 
 	render(){
@@ -62,7 +68,15 @@ class RoomList extends Component {
 
 				<ul id="chat-list" >
 				{this.state.rooms.map( room =>
-					<li key={room.key} onClick={()=> this.props.setActiveRoom(room)}>{room.name}</li>
+					<li key={room.key} 
+					onClick={()=> this.props.setActiveRoom(room)}>
+					{room.name}
+					<button
+					onClick= {(e)=> this.deleteRoom(room.key)}
+					>
+						Delete 
+					</button>
+					</li>
 				)}
 				</ul>
 				
