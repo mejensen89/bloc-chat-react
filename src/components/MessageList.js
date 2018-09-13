@@ -25,6 +25,9 @@ class MessageList extends Component {
 			message.key = snapshot.key
 			this.setState({ message: this.state.message.concat(message)});
 		});
+		this.MessagesRef.on('child_removed', snapshot =>{
+			this.setState({message: this.state.message.filter(message=>message.key !== snapshot.key)})
+		});
 	}
 
 	createMessage(newMessages) {
@@ -36,6 +39,10 @@ class MessageList extends Component {
 		});
 		this.setState({newMessages: ' '});
 		}
+
+	removeMessage(message){
+		this.MessagesRef.child(message.key).remove();
+	}
 
 	handleMessageInput(e){
 		this.setState({
@@ -60,14 +67,18 @@ class MessageList extends Component {
     	return(
        		<div id="messageList">
             	<h1 className="txtC">Chat Room: {this.props.activeRoom.name}</h1>
-            	<div id="messageDisplay">
+            	<div id="messageDisplay" >
                 		{this.state.message
                 		.filter(message =>message.roomID === this.props.activeRoom.key)
                 		.map((message,index) =>
                 			<div key={index} className="GainsboroBack WheatOut">
-                  				<p className="txtL">User: {message.username} </p>
-                  				<p className="txtL">Says: {message.content}</p> 
-                  				<p className="txtL">Time: {this.formatTime(message.sentAt)}</p>
+                  				<p className="txtL"><strong>{message.username}</strong></p>
+                  				<p className="txtL"> {message.content} </p> 
+                  				<p className="txtR">Sent at: {this.formatTime(message.sentAt)}</p>
+                  				<button
+                  					onClick = {()=>this.removeMessage(message)}
+                  				> Delete Message 
+                  				</button>
                 			</div>
                 )
                 }
@@ -79,9 +90,11 @@ class MessageList extends Component {
                 		value={this.state.content}
                 		placeholder="Say something"
                 		onChange={this.handleMessageInput}
-                		className = "vertAlignC"
+                		className = "vertAlignC seventyWidth"
                 	/>
-                	<input type = "submit" className = "vertAlignC"/>
+                	<input 
+                		type = "submit" className = "vertAlignC"
+                	/>
                 </form>
                	</div>        
       </div>

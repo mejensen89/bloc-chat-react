@@ -5,6 +5,8 @@
 
 #messageDisplay {
 	position: relative;
+	margin: 5px;
+	border-radius: 20px;
 }
 
 aside {
@@ -112,6 +114,48 @@ header {
     bottom: 0;
     width: 100%;
     height: 75px;
+}
+
+/*some rules for resizing divs within their containers:*/
+
+.hudnredWidth {
+	width: 100%;
+}
+
+.ninetyWidth {
+	width: 90%;
+}
+
+.eightyWidth {
+	width: 80%;
+}
+
+.seventyWidth {
+	width: 70%;
+}
+
+.sixtyWidth {
+	width: 60%;
+}
+
+.fiftyWidth {
+	width: 50%;
+}
+
+.fourtyWidth {
+	width: 40%;
+}
+
+.thirtyWidth {
+	width: 30%;
+}
+
+.twentyWidth {
+	width: 20%;
+}
+
+.tenWidth {
+	width: 10%;
 }
 
 /*text alignment*/
@@ -1704,6 +1748,10 @@ header {
 }
 
 .evenSpread {
+	justify-content: space-around;
+}
+
+.spaceAround {
 	justify-content: space-around;
 }
 /*custom icon image */

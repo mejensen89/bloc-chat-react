@@ -22,6 +22,9 @@ class RoomList extends Component {
 			room.key = snapshot.key;
 			this.setState({ rooms: this.state.rooms.concat( room ) })
 		});
+		this.roomsRef.on('child_removed', snapshot =>{
+			this.setState({room: this.state.rooms.filter(rooms => rooms.key !== snapshot.key)})
+		});
 	}
 
 	createRoom() {
@@ -39,9 +42,8 @@ class RoomList extends Component {
 		this.setState({newRoomName: e.target.value});
 	}
 
-	deleteRoom (roomkey) {
-		let room = this.props.firebase.database().ref('rooms/' + roomkey);
-		room.remove();
+	deleteRoom (room) {
+		this.roomsRef.child(room.key).remove();
 	}
 
 	render(){
@@ -66,15 +68,17 @@ class RoomList extends Component {
 
 				</form>
 
-				<ul id="chat-list" >
+				<ul id="chat-list" className="flxCol">
 				{this.state.rooms.map( room =>
-					<li key={room.key} 
+					<li
+					className="smallRow spaceAround" 
+					key={room.key} 
 					onClick={()=> this.props.setActiveRoom(room)}>
 					{room.name}
 					<button
-					onClick= {(e)=> this.deleteRoom(room.key)}
+					onClick= {(e)=> this.deleteRoom(room)}
 					>
-						Delete 
+						Remove 
 					</button>
 					</li>
 				)}
