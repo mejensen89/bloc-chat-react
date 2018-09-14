@@ -31,14 +31,15 @@ class MessageList extends Component {
 	}
 
 	createMessage(newMessages) {
-		this.MessagesRef.push({
+			this.MessagesRef.push({
 			username: this.props.user ? this.props.user.displayName : 'Guest',
 			content: this.state.newMessages,
 			roomID: this.props.activeRoom.key,
 			sentAt: this.props.firebase.database.ServerValue.TIMESTAMP
-		});
-		this.setState({newMessages: ' '});
-		}
+			});
+			this.setState({newMessages: ' '});
+			
+	}
 
 	removeMessage(message){
 		this.MessagesRef.child(message.key).remove();

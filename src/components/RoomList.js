@@ -22,7 +22,7 @@ class RoomList extends Component {
 			this.setState({ rooms: this.state.rooms.concat( room ) })
 		});
 		this.roomsRef.on('child_removed', snapshot =>{
-			this.setState({room: this.state.rooms.filter(rooms => rooms.key !== snapshot.key)})
+			this.setState({rooms: this.state.rooms.filter(rooms => rooms.key !== snapshot.key)})
 		});
 	}
 
@@ -96,18 +96,18 @@ class RoomList extends Component {
 						onMouseLeave = {(e)=> this.onMouseLeave(e)}
 					>
 					{room.name}
-					</p>
-					<button 
-						onClick= {(e)=> this.deleteRoom(room)}
-						className="btnRounded fivePad WhiteBack BlackOut"
-					>
-					Remove 
-					</button>
+					</p>			
 					<button 
 						onClick={ ()=> this.changeName(room.key)}
 						className="btnRounded fivePad WhiteBack BlackOut"
 					> 
 					Rename
+					</button>
+					<button 
+						onClick= {(e)=> this.deleteRoom(room)}
+						className="btnRounded fivePad WhiteBack BlackOut"
+					>
+					Remove 
 					</button>
 					</li>
 				)}
