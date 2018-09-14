@@ -8,12 +8,11 @@ class RoomList extends Component {
 		this.state ={
 			rooms: [],
 			newRoomName: "",
-
+			mouseInside: false,
 		};
 		this.roomsRef = this.props.firebase.database().ref('rooms');
 		this.handleRoomInput = this.handleRoomInput.bind(this);
 		this.createRoom = this.createRoom.bind(this);
-		this.deleteRoom = this.deleteRoom.bind(this);
 		}
 
 	componentDidMount(){
@@ -46,6 +45,24 @@ class RoomList extends Component {
 		this.roomsRef.child(room.key).remove();
 	}
 
+	changeName(roomKey) {
+		let nameChange = {
+			key: this.props.activeRoom.key,
+			name: window.prompt("Enter a new room name")
+		};
+		let newRoomName = this.props.firebase.database().ref('rooms/' + roomKey);
+		newRoomName.update({name: nameChange.name})
+		}
+
+	onMouseOver(e, room) {
+			this.setState({ mouseInside: true});
+	}
+
+	onMouseLeave(e) {
+		this.setState({ mouseInside: false});
+	}
+
+
 	render(){
 		return (
 			<section>
@@ -74,11 +91,23 @@ class RoomList extends Component {
 					className="smallRow spaceAround" 
 					key={room.key} 
 					onClick={()=> this.props.setActiveRoom(room)}>
-					{room.name}
-					<button
-					onClick= {(e)=> this.deleteRoom(room)}
+					<p
+						onMouseOver={(e)=> this.onMouseOver(e, room)}
+						onMouseLeave = {(e)=> this.onMouseLeave(e)}
 					>
-						Remove 
+					{room.name}
+					</p>
+					<button 
+						onClick= {(e)=> this.deleteRoom(room)}
+						className="btnRounded fivePad WhiteBack BlackOut"
+					>
+					Remove 
+					</button>
+					<button 
+						onClick={ ()=> this.changeName(room.key)}
+						className="btnRounded fivePad WhiteBack BlackOut"
+					> 
+					Rename
 					</button>
 					</li>
 				)}

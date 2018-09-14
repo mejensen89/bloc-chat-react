@@ -158,6 +158,30 @@ header {
 	width: 10%;
 }
 
+.hundredHeight {
+	height: 100%;
+}
+
+.ninetyHeight {
+	height: 90%;
+}
+
+.eightyHeight {
+	height: 80%;
+}
+
+.seventyHeight {
+	height: 70%;
+}
+
+.sixtyHeight {
+	height: 60%;
+}
+
+.fiftyHeight {
+	height: 50%;
+}
+
 /*text alignment*/
 
 .txtC {

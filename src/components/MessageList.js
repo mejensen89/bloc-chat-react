@@ -90,10 +90,10 @@ class MessageList extends Component {
                 		value={this.state.content}
                 		placeholder="Say something"
                 		onChange={this.handleMessageInput}
-                		className = "vertAlignC seventyWidth"
+                		className = "vertAlignC seventyWidth eightyHeight"
                 	/>
                 	<input 
-                		type = "submit" className = "vertAlignC"
+                		type = "submit" className = "vertAlignC eightyHeight"
                 	/>
                 </form>
                	</div>        
